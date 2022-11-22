@@ -26,3 +26,16 @@ jobs:
             ${{ runner.os }}-nuget-
       - name: Build with dotnet
         run: dotnet build --configuration Release
+
+      # artifact
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dotnetcoreapp
+          path: |
+            DotNetCoreSqlDb/bin/Release/net6.0/publish/
+            DotNetCoreSqlDb/appsettings.json
+            DotNetCoreSqlDb/Dockerfile
+            DotNetCoreSqlDb/entrypoint.sh
+            DotNetCoreSqlDb/README.md
+          retention-days: 5
